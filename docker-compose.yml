@@ -15,7 +15,7 @@ services:
       VAULT_DISABLE_MLOCK: "1"
     volumes:
       - vault_data:/vault/data
-    command: server -dev -dev-root-token-id=${VAULT_TOKEN:-myroot} -dev-listen-address=0.0.0.0:8200
+    command: server -dev --disable-mlock -dev-root-token-id=${VAULT_TOKEN:-myroot} -dev-listen-address=0.0.0.0:8200
     networks:
       - itero-network
     healthcheck:
