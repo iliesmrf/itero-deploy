@@ -16,11 +16,11 @@ services:
       - IPC_LOCK
     volumes:
       - vault_data:/vault/data
-    command: server -dev
+    command: server -dev -dev-root-token-id=${VAULT_TOKEN:-myroot} -dev-listen-address=0.0.0.0:8200
     networks:
       - itero-network
     healthcheck:
-      test: wget --spider http://localhost:8200/v1/sys/health || exit 1
+      test: vault status -format=json >/dev/null 2>&1 || exit 1
       interval: 10s
       timeout: 5s
       retries: 5
